@@ -1,5 +1,7 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
+const ESLintPlugin = require("eslint-webpack-plugin");
+
 const path = require("path");
 
 const htmlPlugin = new HtmlWebpackPlugin({
@@ -9,6 +11,10 @@ const htmlPlugin = new HtmlWebpackPlugin({
 
 const forkTsCheckerPlugin = new ForkTsCheckerWebpackPlugin({
   async: false,
+});
+
+const esLintPlugin = new ESLintPlugin({
+  extensions: ["js", "jsx", "ts", "tsx"],
 });
 
 module.exports = {
@@ -41,5 +47,5 @@ module.exports = {
   resolve: {
     extensions: [".js", ".css", ".less", ".tsx"],
   },
-  plugins: [htmlPlugin, forkTsCheckerPlugin],
+  plugins: [htmlPlugin, forkTsCheckerPlugin, esLintPlugin],
 };
