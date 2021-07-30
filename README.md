@@ -1,6 +1,6 @@
-# react-workspace
+# react-typescript-workspace
 
-Простой воркспейс для старта разработки реакт приложения.
+Простой воркспейс для старта разработки реакт приложения с использованием тайпскрипт.
 
 Чтобы воспользоваться готовым workspace необходимо склонировать проект и выполнить
 
@@ -344,7 +344,7 @@ ReactDOM.render(
 
 Меняем расширение файла index.js на .tsx
 
-Меняем содержимое webpack.config.js на
+Меняем содержимое webpack.config.js (меняем entry, правило для babel-loader и extension)
 
 ```js
 const HtmlWebpackPlugin = require("html-webpack-plugin");
@@ -387,4 +387,53 @@ module.exports = {
   },
   plugins: [htmlPlugin],
 };
+```
+
+Устанавливаем ForkTsCheckerWebpackPlugin чтобы научить webpack отслеживать ошибки типизации
+
+```
+npm install --save-dev fork-ts-checker-webpack-plugin @types/fork-ts-checker-webpack-plugin
+```
+
+Устанавливаем eslint
+
+```
+npm install --save-dev eslint
+```
+
+Устанавливаем плагины с правилами для eslint для react и react-hooks
+
+```
+npm install --save-dev eslint-plugin-react eslint-plugin-react-hooks
+
+```
+
+Устанавливаем eslint парсер для typescript и плагин с парвилами для typescript
+
+```
+npm install --save-dev @typescript-eslint/parser @typescript-eslint/eslint-plugin
+
+```
+
+Создаем файл с настройками для eslint и называем его .eslintrc
+
+```js
+{
+  "root": true,
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/eslint-recommended"
+  ],
+  "rules": {
+    "no-console": 2
+  }
+}
+```
+
+Добавляем в package.json новый скрипт для запуска eslint
+
+```
+    "eslint": "eslint src"
 ```
