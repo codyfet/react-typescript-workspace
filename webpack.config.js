@@ -1,7 +1,4 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
-const ESLintPlugin = require("eslint-webpack-plugin");
-
 const path = require("path");
 
 const htmlPlugin = new HtmlWebpackPlugin({
@@ -9,20 +6,12 @@ const htmlPlugin = new HtmlWebpackPlugin({
   filename: "./index.html",
 });
 
-const forkTsCheckerPlugin = new ForkTsCheckerWebpackPlugin({
-  async: false,
-});
-
-const esLintPlugin = new ESLintPlugin({
-  extensions: ["js", "jsx", "ts", "tsx"],
-});
-
 module.exports = {
   /**
    * Секции entry и output в данном случае можно было бы опустить,
    * т.к. по умолчанию заданы именно такие настройки.
    */
-  entry: "./src/index.tsx",
+  entry: "./src/index.js",
   output: {
     filename: "bundle.js",
     path: path.resolve(__dirname, "dist"),
@@ -30,7 +19,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.(js|jsx|ts|tsx)$/,
+        test: /\.(js)$/,
         exclude: /node_modules/,
         use: ["babel-loader"],
       },
@@ -45,7 +34,7 @@ module.exports = {
     ],
   },
   resolve: {
-    extensions: [".js", ".css", ".less", ".tsx"],
+    extensions: [".js", ".css", ".less"],
   },
-  plugins: [htmlPlugin, forkTsCheckerPlugin, esLintPlugin],
+  plugins: [htmlPlugin],
 };
