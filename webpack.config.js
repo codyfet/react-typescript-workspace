@@ -7,11 +7,7 @@ const htmlPlugin = new HtmlWebpackPlugin({
 });
 
 module.exports = {
-  /**
-   * Секции entry и output в данном случае можно было бы опустить,
-   * т.к. по умолчанию заданы именно такие настройки.
-   */
-  entry: "./src/index.js",
+  entry: "./src/index.tsx",
   output: {
     filename: "bundle.js",
     path: path.resolve(__dirname, "dist"),
@@ -19,7 +15,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.(js)$/,
+        test: /\.(js|jsx|ts|tsx)$/,
         exclude: /node_modules/,
         use: ["babel-loader"],
       },
@@ -34,7 +30,7 @@ module.exports = {
     ],
   },
   resolve: {
-    extensions: [".js", ".css", ".less"],
+    extensions: [".js", ".css", ".less", ".ts", ".tsx"],
   },
   plugins: [htmlPlugin],
 };

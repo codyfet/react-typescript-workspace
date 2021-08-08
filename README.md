@@ -187,12 +187,6 @@ module.exports = {
 };
 ```
 
-TODO: разобраться с
-
-https://webpack.js.org/guides/development/
-https://webpack.js.org/configuration/dev-server/
-https://stackoverflow.com/questions/62991326/difference-between-publicpath-and-contentbase-in-webpack
-
 ### Устанавливаем react
 
 Установить библиотеки react, react-dom
@@ -207,7 +201,7 @@ npm install --save react react-dom
 npm install --save-dev @babel/preset-react
 ```
 
-Меняем .babelrc, добавляем пресеты в настройки
+Изменить .babelrc, добавить пресеты в настройки
 
 ```js
 {
@@ -242,24 +236,6 @@ UPDATE#1: При написании реакт компонентов приня
 - Измените правило для babel-loader `test: /\.(js)$/` --> `test: /\.(js|jsx)$/`
 - Добавьте в секцию resolve значение `['.js', '.css', '.less']` --> `['.js', '.jsx', '.css', '.less']`
 
-UPDATE#2: Для того, чтобы в es6 классах можно было писать методы через стрелочные функции необходимо установить плагин для бабеля
-
-```shell
-npm install --save-dev babel-plugin-transform-class-properties
-```
-
-И обновить файл с настройками .babelrc
-
-```js
-{
-    'presets': [
-        '@babel/preset-env',
-        '@babel/preset-react'
-    ],
-    'plugins': ['transform-class-properties']
-}
-```
-
 После того, как эти шаги были выполнены, необходимо выполнить команду
 
 ```shell
@@ -272,44 +248,44 @@ npm run start
 npm install --save-dev typescript
 ```
 
-Устанавливаем тайпинги для react и react-dom
+Установить тайпинги для react и react-dom
 
 ```shell
 npm install --save-dev @types/react @types/react-dom
 ```
 
-Создаем файл tsconfig.json, в котором будет лежать конфигурация typescript
+Создать файл tsconfig.json, в котором будет лежать конфигурация typescript. Для этого выполнить
+
+```
+npx tsc --init
+```
+
+В созданном файле `tsconfig.json` и переопределить опции:
 
 ```js
 {
-  "compilerOptions": {
-    "lib": ["dom", "dom.iterable", "esnext"],
-    "allowJs": true,
-    "allowSyntheticDefaultImports": true,
-    "skipLibCheck": true,
-    "esModuleInterop": true,
-    "strict": true,
-    "forceConsistentCasingInFileNames": true,
-    "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "noEmit": true,
-    "jsx": "react"
-  },
-  "include": ["src"]
+    "compilerOptions": {
+...
+        "jsx": "react",
+        "outDir": "./dist",
+        "rootDir": "./src"
+...
+    }
 }
 ```
 
-Устанавливаем пресеты для бабеля для typescript
+Установить пресеты для бабеля для typescript
 
 ```shell
 npm install --save-dev @babel/preset-typescript
 ```
 
-Устанавливаем пресеты для бабеля для поддержки async/await синтаксиса
+Установить пресеты для бабеля для поддержки es6 синтаксиса (в частности async/await)
 
 ```shell
-npm install --save-dev @babel/plugin-transform-runtime @babel/runtime
+npm install --save-dev @babel/plugin-transform-runtime
+
+npm install --save @babel/runtime
 ```
 
 Актуализируем файл с настройками бабеля
@@ -332,7 +308,7 @@ npm install --save-dev @babel/plugin-transform-runtime @babel/runtime
 }
 ```
 
-Меняем содержимое файла index.js на typescript код
+Изменить содержимое файла index.jsx на typescript код
 
 ```js
 import React from "react";
@@ -348,9 +324,9 @@ ReactDOM.render(
 );
 ```
 
-Меняем расширение файла index.js на .tsx
+Изменить расширение файла index.jsx на .tsx
 
-Меняем содержимое webpack.config.js (меняем entry, правило для babel-loader и extension)
+Изменить содержимое webpack.config.js (entry, правило для babel-loader и extension)
 
 ```js
 const HtmlWebpackPlugin = require("html-webpack-plugin");
@@ -395,7 +371,7 @@ module.exports = {
 };
 ```
 
-Устанавливаем ForkTsCheckerWebpackPlugin чтобы научить webpack отслеживать ошибки типизации
+Установить ForkTsCheckerWebpackPlugin чтобы научить webpack отслеживать ошибки типизации
 
 ```
 npm install --save-dev fork-ts-checker-webpack-plugin @types/fork-ts-checker-webpack-plugin
@@ -543,3 +519,6 @@ npm install --save-dev eslint-plugin-prettier
 ```
 "eslint:fix": "eslint src --fix"
 ```
+
+Источники:
+https://www.carlrippon.com/creating-react-app-with-typescript-eslint-with-webpack5/
