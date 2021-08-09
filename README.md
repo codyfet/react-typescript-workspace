@@ -522,3 +522,6 @@ npm install --save-dev eslint-plugin-prettier
 
 Источники:
 https://www.carlrippon.com/creating-react-app-with-typescript-eslint-with-webpack5/
+
+https://blog.johnnyreilly.com/2019/07/13/typescript-and-eslint-meet-fork-ts-checker-webpack-plugin/
+https://dev.to/robertcoopercode/using-eslint-and-prettier-in-a-typescript-project-53jb
