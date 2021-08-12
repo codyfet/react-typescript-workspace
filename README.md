@@ -69,17 +69,17 @@ npm install --save-dev babel-loader @babel/core @babel/preset-env
 
 ```js
 module.exports = {
-  module: {
-    rules: [
-      {
-        test: /\.js$/,
-        exclude: /node_modules/,
-        use: {
-          loader: "babel-loader",
-        },
-      },
-    ],
-  },
+    module: {
+        rules: [
+            {
+                test: /\.js$/,
+                exclude: /node_modules/,
+                use: {
+                    loader: 'babel-loader',
+                },
+            },
+        ],
+    },
 };
 ```
 
@@ -88,16 +88,16 @@ module.exports = {
 ```html
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>React Application</title>
-  </head>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title>React Application</title>
+    </head>
 
-  <body>
-    <div id="root"></div>
-  </body>
+    <body>
+        <div id="root"></div>
+    </body>
 </html>
 ```
 
@@ -133,57 +133,57 @@ npm install --save-dev style-loader css-loader less-loader less
 
 ```css
 body {
-  background: white;
-  text-align: center;
+    background: white;
+    text-align: center;
 
-  span {
-    font-size: 50px;
-  }
+    span {
+        font-size: 50px;
+    }
 }
 ```
 
 Поменять webpack.config.js (настроить плагины и лоадеры)
 
 ```js
-const HtmlWebpackPlugin = require("html-webpack-plugin");
-const path = require("path");
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const path = require('path');
 
 const htmlPlugin = new HtmlWebpackPlugin({
-  template: "./src/index.html",
-  filename: "./index.html",
+    template: './src/index.html',
+    filename: './index.html',
 });
 
 module.exports = {
-  /**
-   * Секции entry и output в данном случае можно было бы опустить,
-   * т.к. по умолчанию заданы именно такие настройки.
-   */
-  entry: "./src/index.js",
-  output: {
-    filename: "bundle.js",
-    path: path.resolve(__dirname, "dist"),
-  },
-  module: {
-    rules: [
-      {
-        test: /\.(js)$/,
-        exclude: /node_modules/,
-        use: ["babel-loader"],
-      },
-      {
-        test: /\.css$/,
-        use: ["style-loader", "css-loader"],
-      },
-      {
-        test: /\.less$/,
-        use: ["style-loader", "css-loader", "less-loader"],
-      },
-    ],
-  },
-  resolve: {
-    extensions: [".js", ".css", ".less"],
-  },
-  plugins: [htmlPlugin],
+    /**
+     * Секции entry и output в данном случае можно было бы опустить,
+     * т.к. по умолчанию заданы именно такие настройки.
+     */
+    entry: './src/index.js',
+    output: {
+        filename: 'bundle.js',
+        path: path.resolve(__dirname, 'dist'),
+    },
+    module: {
+        rules: [
+            {
+                test: /\.(js)$/,
+                exclude: /node_modules/,
+                use: ['babel-loader'],
+            },
+            {
+                test: /\.css$/,
+                use: ['style-loader', 'css-loader'],
+            },
+            {
+                test: /\.less$/,
+                use: ['style-loader', 'css-loader', 'less-loader'],
+            },
+        ],
+    },
+    resolve: {
+        extensions: ['.js', '.css', '.less'],
+    },
+    plugins: [htmlPlugin],
 };
 ```
 
@@ -215,26 +215,26 @@ npm install --save-dev @babel/preset-react
 Пример Hello world приложения на реакт. Содержимое файла src/index.js
 
 ```js
-import React from "react";
-import ReactDOM from "react-dom";
+import React from 'react';
+import ReactDOM from 'react-dom';
 
-import "./styles";
+import './styles';
 
 class HelloWorld extends React.Component {
-  render() {
-    return <span>Hello, world!</span>;
-  }
+    render() {
+        return <span>Hello, world!</span>;
+    }
 }
 
-ReactDOM.render(<HelloWorld />, document.getElementById("root"));
+ReactDOM.render(<HelloWorld />, document.getElementById('root'));
 ```
 
 UPDATE#1: При написании реакт компонентов принято использовать расширение для файлов .jsx
 
-- Переименуйте файл `index.js` --> `index.jsx`
-- Измените в настройках entry в файле webpack.config.js значение `'./src/index.js'` --> `'./src/index.jsx'`
-- Измените правило для babel-loader `test: /\.(js)$/` --> `test: /\.(js|jsx)$/`
-- Добавьте в секцию resolve значение `['.js', '.css', '.less']` --> `['.js', '.jsx', '.css', '.less']`
+-   Переименуйте файл `index.js` --> `index.jsx`
+-   Измените в настройках entry в файле webpack.config.js значение `'./src/index.js'` --> `'./src/index.jsx'`
+-   Измените правило для babel-loader `test: /\.(js)$/` --> `test: /\.(js|jsx)$/`
+-   Добавьте в секцию resolve значение `['.js', '.css', '.less']` --> `['.js', '.jsx', '.css', '.less']`
 
 После того, как эти шаги были выполнены, необходимо выполнить команду
 
@@ -311,16 +311,16 @@ npm install --save @babel/runtime
 Изменить содержимое файла index.jsx на typescript код
 
 ```js
-import React from "react";
-import ReactDOM from "react-dom";
+import React from 'react';
+import ReactDOM from 'react-dom';
 
 const App = () => <h1>My React and TypeScript App!</h1>;
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById("root")
+    <React.StrictMode>
+        <App />
+    </React.StrictMode>,
+    document.getElementById('root'),
 );
 ```
 
@@ -329,45 +329,45 @@ ReactDOM.render(
 Изменить содержимое webpack.config.js (entry, правило для babel-loader и extension)
 
 ```js
-const HtmlWebpackPlugin = require("html-webpack-plugin");
-const path = require("path");
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const path = require('path');
 
 const htmlPlugin = new HtmlWebpackPlugin({
-  template: "./src/index.html",
-  filename: "./index.html",
+    template: './src/index.html',
+    filename: './index.html',
 });
 
 module.exports = {
-  /**
-   * Секции entry и output в данном случае можно было бы опустить,
-   * т.к. по умолчанию заданы именно такие настройки.
-   */
-  entry: "./src/index.tsx",
-  output: {
-    filename: "bundle.js",
-    path: path.resolve(__dirname, "dist"),
-  },
-  module: {
-    rules: [
-      {
-        test: /\.(js|jsx|ts|tsx)$/,
-        exclude: /node_modules/,
-        use: ["babel-loader"],
-      },
-      {
-        test: /\.css$/,
-        use: ["style-loader", "css-loader"],
-      },
-      {
-        test: /\.less$/,
-        use: ["style-loader", "css-loader", "less-loader"],
-      },
-    ],
-  },
-  resolve: {
-    extensions: [".js", ".css", ".less", ".ts", ".tsx"],
-  },
-  plugins: [htmlPlugin],
+    /**
+     * Секции entry и output в данном случае можно было бы опустить,
+     * т.к. по умолчанию заданы именно такие настройки.
+     */
+    entry: './src/index.tsx',
+    output: {
+        filename: 'bundle.js',
+        path: path.resolve(__dirname, 'dist'),
+    },
+    module: {
+        rules: [
+            {
+                test: /\.(js|jsx|ts|tsx)$/,
+                exclude: /node_modules/,
+                use: ['babel-loader'],
+            },
+            {
+                test: /\.css$/,
+                use: ['style-loader', 'css-loader'],
+            },
+            {
+                test: /\.less$/,
+                use: ['style-loader', 'css-loader', 'less-loader'],
+            },
+        ],
+    },
+    resolve: {
+        extensions: ['.js', '.css', '.less', '.ts', '.tsx'],
+    },
+    plugins: [htmlPlugin],
 };
 ```
 
@@ -468,10 +468,11 @@ npm install --save-dev @typescript-eslint/parser @typescript-eslint/eslint-plugi
 }
 ```
 
-Добавить в package.json новый скрипт для запуска eslint
+Добавить в package.json скрипты для запуска eslint
 
 ```
-"eslint": "eslint src"
+"eslint": "eslint src",
+"eslint:fix": "eslint src --fix"
 ```
 
 ### Встраиваем проверку eslint в процесс сборки
@@ -485,93 +486,120 @@ npm install --save-dev eslint-webpack-plugin
 Подключить его в webpack.config.js
 
 ```js
-const path = require("path");
+const path = require('path');
 
-const HtmlWebpackPlugin = require("html-webpack-plugin");
-const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
-const ESLintPlugin = require("eslint-webpack-plugin");
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
+const ESLintPlugin = require('eslint-webpack-plugin');
 
 const htmlPlugin = new HtmlWebpackPlugin({
-  template: "./src/index.html",
-  filename: "./index.html",
+    template: './src/index.html',
+    filename: './index.html',
 });
 
 const forkTsCheckerPlugin = new ForkTsCheckerWebpackPlugin();
 
 const esLintPlugin = new ESLintPlugin({
-  extensions: ["js", "jsx", "ts", "tsx"],
+    extensions: ['js', 'jsx', 'ts', 'tsx'],
 });
 
 module.exports = {
-  entry: "./src/index.tsx",
-  output: {
-    filename: "bundle.js",
-    path: path.resolve(__dirname, "dist"),
-  },
-  module: {
-    rules: [
-      {
-        test: /\.(js|jsx|ts|tsx)$/,
-        exclude: /node_modules/,
-        use: ["babel-loader"],
-      },
-      {
-        test: /\.css$/,
-        use: ["style-loader", "css-loader"],
-      },
-      {
-        test: /\.less$/,
-        use: ["style-loader", "css-loader", "less-loader"],
-      },
-    ],
-  },
-  resolve: {
-    extensions: [".js", ".css", ".less", ".ts", ".tsx"],
-  },
-  plugins: [htmlPlugin, forkTsCheckerPlugin, esLintPlugin],
+    entry: './src/index.tsx',
+    output: {
+        filename: 'bundle.js',
+        path: path.resolve(__dirname, 'dist'),
+    },
+    module: {
+        rules: [
+            {
+                test: /\.(js|jsx|ts|tsx)$/,
+                exclude: /node_modules/,
+                use: ['babel-loader'],
+            },
+            {
+                test: /\.css$/,
+                use: ['style-loader', 'css-loader'],
+            },
+            {
+                test: /\.less$/,
+                use: ['style-loader', 'css-loader', 'less-loader'],
+            },
+        ],
+    },
+    resolve: {
+        extensions: ['.js', '.css', '.less', '.ts', '.tsx'],
+    },
+    plugins: [htmlPlugin, forkTsCheckerPlugin, esLintPlugin],
 };
 ```
 
 ### Устанавливаем Prettier
 
+Установить библиотеку prettier
+
 ```
 npm install --save-dev prettier
 ```
 
-Устанавливаем пакет eslint-config-prettier, который нужен чтобы избежать конфликты между eslint и prettier
+Создать файл с настройками prettier и назвать его .prettierrc.js
+
+```
+module.exports =  {
+  semi:  true,
+  trailingComma:  'all',
+  singleQuote:  true,
+  printWidth:  120,
+  tabWidth:  4,
+};
+```
+
+Добавить в package.json скрипт
+
+```
+"prettier:fix": "prettier src --write"
+```
+
+Установить пакет eslint-config-prettier, который нужен чтобы избежать конфликты между eslint и prettier
 
 ```
 npm install --save-dev eslint-config-prettier
 ```
 
-Устанавливаем плагин с prettier-правилами для eslint (чтобы eslint воспринимал prettier правила как eslint правила)
+Установить плагин с prettier-правилами для eslint (чтобы eslint воспринимал prettier правила как eslint правила)
 
 ```
 npm install --save-dev eslint-plugin-prettier
 
 ```
 
-Создаем файл с настройками prettier и называем его .prettierrc.json
+Внести изменения в .eslintrc
 
 ```
 {
-  "singleQuote": true,
-  "jsxSingleQuote": true,
-  "arrowParens": "always",
-  "max-len": ["error", 140, 2],
-  "tabWidth": 4,
-  "useTabs": false
+    "root": true,
+    "parser": "@typescript-eslint/parser",
+    "plugins": ["@typescript-eslint", "react-hooks", "prettier"],
+    "extends": ["eslint:recommended", "plugin:react/recommended", "plugin:@typescript-eslint/eslint-recommended"],
+    "rules": {
+        "no-console": 2,
+        "prettier/prettier": [2]
+    },
+    "settings": {
+        "react": {
+            "pragma": "React",
+            "version": "detect"
+        }
+    }
 }
 ```
 
-Добавляем скрипт в package.json
+Теперь при выполнении команды npm start выполняется сборка проекта при помощи webpack. В процессе сборки проверяется:
 
-```
-"eslint:fix": "eslint src --fix"
-```
+1. Наличие ошибок типизации (forkTsChecker)
+2. Наличие ошибок eslint
+3. Наличие ошибок prettier
 
 Источники:
 https://www.carlrippon.com/creating-react-app-with-typescript-eslint-with-webpack5/
-
 https://blog.johnnyreilly.com/2019/07/13/typescript-and-eslint-meet-fork-ts-checker-webpack-plugin/
 https://dev.to/robertcoopercode/using-eslint-and-prettier-in-a-typescript-project-53jb
