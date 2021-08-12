@@ -424,7 +424,7 @@ module.exports = {
 
 ### Устанавливаем eslint
 
-Установить библиотек eslint
+Установить библиотеку eslint
 
 ```
 npm install --save-dev eslint
@@ -474,39 +474,35 @@ npm install --save-dev @typescript-eslint/parser @typescript-eslint/eslint-plugi
 "eslint": "eslint src"
 ```
 
-Устанавливаем eslint-webpack-plugin, который будет оповещать об ошибка eslint во время сборки webpack
+### Встраиваем проверку eslint в процесс сборки
+
+Установить eslint-webpack-plugin, который будет оповещать об ошибка eslint во время сборки webpack
 
 ```
 npm install --save-dev eslint-webpack-plugin
 ```
 
-Подключаем его в webpack.config.js
+Подключить его в webpack.config.js
 
 ```js
+const path = require("path");
+
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
 const ESLintPlugin = require("eslint-webpack-plugin");
-
-const path = require("path");
 
 const htmlPlugin = new HtmlWebpackPlugin({
   template: "./src/index.html",
   filename: "./index.html",
 });
 
-const forkTsCheckerPlugin = new ForkTsCheckerWebpackPlugin({
-  async: false,
-});
+const forkTsCheckerPlugin = new ForkTsCheckerWebpackPlugin();
 
 const esLintPlugin = new ESLintPlugin({
   extensions: ["js", "jsx", "ts", "tsx"],
 });
 
 module.exports = {
-  /**
-   * Секции entry и output в данном случае можно было бы опустить,
-   * т.к. по умолчанию заданы именно такие настройки.
-   */
   entry: "./src/index.tsx",
   output: {
     filename: "bundle.js",
@@ -530,13 +526,13 @@ module.exports = {
     ],
   },
   resolve: {
-    extensions: [".js", ".css", ".less", ".tsx"],
+    extensions: [".js", ".css", ".less", ".ts", ".tsx"],
   },
   plugins: [htmlPlugin, forkTsCheckerPlugin, esLintPlugin],
 };
 ```
 
-Устанавливаем Prettier
+### Устанавливаем Prettier
 
 ```
 npm install --save-dev prettier

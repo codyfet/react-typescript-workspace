@@ -1,13 +1,19 @@
+const path = require("path");
+
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
-const path = require("path");
+const ESLintPlugin = require("eslint-webpack-plugin");
 
 const htmlPlugin = new HtmlWebpackPlugin({
   template: "./src/index.html",
   filename: "./index.html",
 });
 
-const forkTsCheckerWebpackPlugin = new ForkTsCheckerWebpackPlugin();
+const forkTsCheckerPlugin = new ForkTsCheckerWebpackPlugin();
+
+const esLintPlugin = new ESLintPlugin({
+  extensions: ["js", "jsx", "ts", "tsx"],
+});
 
 module.exports = {
   entry: "./src/index.tsx",
@@ -35,5 +41,5 @@ module.exports = {
   resolve: {
     extensions: [".js", ".css", ".less", ".ts", ".tsx"],
   },
-  plugins: [htmlPlugin, forkTsCheckerWebpackPlugin],
+  plugins: [htmlPlugin, forkTsCheckerPlugin, esLintPlugin],
 };
