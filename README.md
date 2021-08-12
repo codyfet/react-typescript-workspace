@@ -424,45 +424,54 @@ module.exports = {
 
 ### Устанавливаем eslint
 
+Установить библиотек eslint
+
 ```
 npm install --save-dev eslint
 ```
 
-Устанавливаем плагины с правилами для eslint для react и react-hooks
+Установить плагины с правилами для eslint для react и react-hooks
 
 ```
 npm install --save-dev eslint-plugin-react eslint-plugin-react-hooks
 
 ```
 
-Устанавливаем eslint парсер для typescript и плагин с парвилами для typescript
+Установить eslint парсер для typescript и плагин с правилами для typescript
 
 ```
 npm install --save-dev @typescript-eslint/parser @typescript-eslint/eslint-plugin
 
 ```
 
-Создаем файл с настройками для eslint и называем его .eslintrc
+Созать файл с настройками для eslint и называем его .eslintrc
 
 ```js
 {
   "root": true,
   "parser": "@typescript-eslint/parser",
-  "plugins": ["@typescript-eslint"],
+  "plugins": ["@typescript-eslint", "react-hooks"],
   "extends": [
     "eslint:recommended",
+    "plugin:react/recommended",
     "plugin:@typescript-eslint/eslint-recommended"
   ],
   "rules": {
     "no-console": 2
+  },
+  "settings": {
+    "react": {
+      "pragma": "React",
+      "version": "detect"
+    }
   }
 }
 ```
 
-Добавляем в package.json новый скрипт для запуска eslint
+Добавить в package.json новый скрипт для запуска eslint
 
 ```
-    "eslint": "eslint src"
+"eslint": "eslint src"
 ```
 
 Устанавливаем eslint-webpack-plugin, который будет оповещать об ошибка eslint во время сборки webpack
